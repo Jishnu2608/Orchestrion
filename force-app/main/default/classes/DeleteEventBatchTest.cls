@@ -16,7 +16,7 @@ public class DeleteEventBatchTest {
         
         for(Integer i=0;i<=200;i++){
             Event__c event = new Event__c(
-                Name__c = 'Sporty Fit Campaign #' + i+1,
+                Name__c = 'Sports Fit Campaign #' + i+1,
                 Event_Organizer__c  = org.Id,
                 Event_Type__c = 'Virtual',
                 Frequency__c  = 'Weekly',

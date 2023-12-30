@@ -15,7 +15,7 @@ public class EventAttendeeTriggerTest {
         insert org;
         
         Event__c event = new Event__c(
-            Name__c = 'Sporty Fit Campaign',
+            Name__c = 'Sports Fit Campaign',
             Event_Organizer__c  = org.Id,
             Event_Type__c = 'Virtual',
             Frequency__c  = 'Weekly',
@@ -27,9 +27,9 @@ public class EventAttendeeTriggerTest {
         );
         insert event;
         Attendee__c att = new Attendee__c(
-            Name = 'Amandeep Kalita',
-            Email__c = 'krisos.717@gmail.com',
-            Phone__c = '8822164319'
+            Name = 'Aryan Bhardwaj',
+            Email__c = 'ab.aryanbhardwaj16@gmail.com',
+            Phone__c = '8847053792'
         );
         
         insert att;
