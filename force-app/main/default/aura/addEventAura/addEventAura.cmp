@@ -1,0 +1,4 @@
+<aura:component
+  implements="lightning:actionOverride">
+  <c:addEvent />
+</aura:component>
