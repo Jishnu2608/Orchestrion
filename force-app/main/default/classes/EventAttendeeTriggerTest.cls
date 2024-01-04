@@ -1,19 +1,15 @@
 @isTest
-public class EventAttendeeTriggerTest {
-	
+public class EventAttendeeTriggerTest {	
     @testSetup
-    public static void setupData(){
-        
+    public static void setupData(){        
         Event_Organizer__c  org = new Event_Organizer__c (
             Name = 'Jishnudeep Borah',
             Phone__c = '8822978435',
             Email__c = 'jishnudeepborah@gmail.com',
             Alternative_Phone__c  = '8822978435',
             Alternative_Email__c ='jishnudeepborah@gmail.com'
-        );
-        
-        insert org;
-        
+        );        
+        insert org;        
         Event__c event = new Event__c(
             Name__c = 'Sports Fit Campaign',
             Event_Organizer__c  = org.Id,
@@ -30,21 +26,17 @@ public class EventAttendeeTriggerTest {
             Name = 'Aryan Bhardwaj',
             Email__c = 'ab.aryanbhardwaj16@gmail.com',
             Phone__c = '8847053792'
-        );
-        
-        insert att;
-        
+        );        
+        insert att;        
         Event_Attendee__c evtAtt = new Event_Attendee__c(Event__c = event.Id, Attendee__c = att.Id);
         insert evtAtt;
-    }
-    
+    }   
     @isTest
     static void sendEmailTest(){
         Test.startTest();
         try{
             integer i = 10/0;
-        }catch(System.Exception ex ){
-            
+        }catch(System.Exception ex ){           
         }
         Test.stopTest();
     }

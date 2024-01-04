@@ -27,8 +27,7 @@ public class DeleteEventBatchTest {
                 End_Date_Time__c  = System.now().addDays(3).addMonths(-4)
             );
             eventList.add(event);
-     	}
-        
+     	}        
      	insert eventList;
     }
     
