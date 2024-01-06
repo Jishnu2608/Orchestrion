@@ -8,7 +8,8 @@
 
 .titleCase{
     font-size: 25px !important;
-    color: blue !important;
+    color: black !important;
+    font-weight: bold !important;
     text-align: center !important;
     margin-bottom: 5px !important;
     margin-top: 5px !important;
