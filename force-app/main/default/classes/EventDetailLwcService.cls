@@ -4,7 +4,7 @@ public with sharing class EventDetailLwcService {
     public static Event__c fetchEventDetails(String recordId){
         Event__c eventRecord = new Event__c();
         try {
-            eventRecord = [SELECT Id, Name, CreatedDate, EventCompleted__c, Event_Completed__c,
+            eventRecord = [SELECT Id, Name, CreatedDate, EventCompleted__c,
                             Location__c, Event_Organizer__c, Event_Organizer__r.Name,Event_Organizer__r.Email__c, Event_Organizer__r.OwnerId,
                             Event_Organizer__r.Company__c, Event_Organizer__r.ShortIntro__c, Event_Organizer__r.Picture__c,
                             Location__r.Name, Location__r.Street__c, Location__r.City__C,
