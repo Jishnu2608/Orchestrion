@@ -3,91 +3,107 @@
 //the data provided by the third party.
 
 global class AutocreatedRegHandler1704363403511 implements Auth.RegistrationHandler{
-global boolean canCreateUser(Auth.UserData data) {
-	//TODO: Check whether we want to allow creation of a user with this data
-	//Set<String> s = new Set<String>{'usernamea', 'usernameb', 'usernamec'};
-	//if(s.contains(data.username)) {
-		//return true;
-	//}
-	return false;
-}
+
 
 global User createUser(Id portalId, Auth.UserData data){
-	if(!canCreateUser(data)) {
-		//Returning null or throwing an exception fails the SSO flow
-		return null;
-	}
-	if(data.attributeMap.containsKey('sfdc_networkid')) {
-		//We have a community id, so create a user with community access
-		//TODO: Get an actual account
-		Account a = [SELECT Id FROM account WHERE name='Acme'];
-		Contact c = new Contact();
-		c.accountId = a.Id;
-		c.email = data.email;
-		c.firstName = data.firstName;
-		c.lastName = data.lastName;
-		insert(c);
-
-		//TODO: Customize the username and profile. Also check that the username doesn't already exist and
-		//possibly ensure there are enough org licenses to create a user. Must be 80 characters or less.
-		User u = new User();
-		Profile p = [SELECT Id FROM profile WHERE name='Customer Portal User'];
-		u.username = data.username + '@acmecorp.com';
-		u.email = data.email;
-		u.lastName = data.lastName;
-		u.firstName = data.firstName;
-		String alias = data.username;
-		//Alias must be 8 characters or less
-		if(alias.length() > 8) {
-			alias = alias.substring(0, 8);
-		}
-		u.alias = alias;
-		u.languagelocalekey = UserInfo.getLocale();
-		u.localesidkey = UserInfo.getLocale();
-		u.emailEncodingKey = 'UTF-8';
-		u.timeZoneSidKey = 'America/Los_Angeles';
-		u.profileId = p.Id;
-		u.contactId = c.Id;
-		return u;
-	} else {
-		//This is not a community, so create a regular standard user
-		User u = new User();
-		Profile p = [SELECT Id FROM profile WHERE name='Standard User'];
-		//TODO: Customize the username. Also check that the username doesn't already exist and
-		//possibly ensure there are enough org licenses to create a user. Must be 80 characters
-		//or less.
-		u.username = data.username + '@myorg.com';
-		u.email = data.email;
-		u.lastName = data.lastName;
-		u.firstName = data.firstName;
-		String alias = data.username;
-		//Alias must be 8 characters or less
-		if(alias.length() > 8) {
-			alias = alias.substring(0, 8);
-		}
-		u.alias = alias;
-		u.languagelocalekey = UserInfo.getLocale();
-		u.localesidkey = UserInfo.getLocale();
-		u.emailEncodingKey = 'UTF-8';
-		u.timeZoneSidKey = 'America/Los_Angeles';
-		u.profileId = p.Id;
-		return u;
-	}
-}
-
-global void updateUser(Id userId, Id portalId, Auth.UserData data){
-	User u = new User(id=userId);
-	//TODO: Customize the username. Must be 80 characters or less.
-	//u.username = data.username + '@myorg.com';
-	u.email = data.email;
-	u.lastName = data.lastName;
-	u.firstName = data.firstName;
-	//String alias = data.username;
-	//Alias must be 8 characters or less
-	//if(alias.length() > 8) {
-		//alias = alias.substring(0, 8);
-	//}
-	//u.alias = alias;
-	update(u);
-}
+        
+        
+        System.debug(SYSTEM.LoggingLevel.DEBUG, '\n **** GEmail Data '+data);
+        System.debug(SYSTEM.LoggingLevel.DEBUG, '\n **** Gemail Att Map '+data.attributeMap);
+        
+        String userName = data.email.subStringBefore('@') + '@partner.com.gemail.dev';
+        
+        if(data.attributeMap.containsKey('sfdc_networkid')) {
+            userName = data.email.subStringBefore('@') + '@eventify.com.gemail.portal';
+        }
+        
+        List<User> userList = [Select Id, Name, Email, UserName From User 
+                                      Where ( UserName =: userName)
+                                      AND isActive = true
+                                      ];
+        User user = new User();
+        if(userList != null && userList.size() > 0){
+            user = userList.get(0);
+            return user;
+        } else {
+        
+            if(data.attributeMap.containsKey('sfdc_networkid')) {
+                //We have a community id, so create a user with community access
+                //TODO: Get an actual account
+                
+                Account a = [SELECT Id FROM account WHERE name='Google Email'];
+                
+                Contact c = new Contact();
+                c.accountId = a.Id;
+                c.email = data.email;
+                c.firstName = data.firstName;
+                c.lastName  = data.lastName;
+                insert(c);
+        
+                
+                User u = new User();
+                Profile p = [SELECT Id FROM profile WHERE name='Partner Community Login User'];
+                // sfdcpnather@gmail.com
+                String partnerUserName = data.email.subStringBefore('@') + '@eventify.com.gemail.portal';
+                
+                u.username = partnerUserName;
+                u.email = data.email;
+                u.lastName = data.lastName;
+                u.firstName = data.firstName;
+                String alias = u.username;
+                //Alias must be 8 characters or less
+                if(alias !=null && alias.length() > 8) {
+                    alias = alias.substring(0, 8);
+                }
+                u.alias = alias;
+                u.languagelocalekey = UserInfo.getLocale();
+                u.localesidkey = UserInfo.getLocale();
+                u.emailEncodingKey = 'UTF-8';
+                u.timeZoneSidKey = 'America/Los_Angeles';
+                u.profileId = p.Id;
+                u.contactId = c.Id;
+                return u;
+            } else {
+                
+                User u = new User();
+                
+                Profile p = [SELECT Id FROM profile WHERE name='System Administrator'];
+                
+                u.username = data.email.subStringBefore('@') + '@partner.com.gemail.dev';
+                u.email = data.email;
+                u.lastName = data.lastName;
+                u.firstName = data.firstName;
+                String alias = u.username;
+                //Alias must be 8 characters or less
+                if(alias.length() > 8) {
+                    alias = alias.substring(0, 8);
+                }
+                u.alias = alias;
+                u.languagelocalekey = UserInfo.getLocale();
+                u.localesidkey = UserInfo.getLocale();
+                u.emailEncodingKey = 'UTF-8';
+                u.timeZoneSidKey = 'America/Los_Angeles';
+                u.profileId = p.Id;
+                
+                return u;
+            }
+        }
+    }
+    
+    
+    global void updateUser(Id userId, Id portalId, Auth.UserData data){
+    
+        String userName = data.email.subStringBefore('@') + '@partner.com.gemail.dev';
+        
+        if(data.attributeMap.containsKey('sfdc_networkid')) {
+            userName = data.email.subStringBefore('@') + '@eventify.com.gemail.portal';
+        }
+        System.debug('#### userId '+userId);
+        List<User> userList = [Select Id, Name, Email, UserName From User Where UserName =: userName AND isActive = true];
+        User u = new User();
+        if(userList != null && userList.size() > 0){
+            u = userList.get(0);
+        }
+        
+    }
 }
