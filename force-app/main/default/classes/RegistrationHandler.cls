@@ -20,7 +20,7 @@ global class RegistrationHandler {
 
         
         User u = new User();
-        Profile p = [SELECT Id FROM profile WHERE Name =: System.Label.Eventify_Attendee LIMIT 1];
+        Profile p = [SELECT Id FROM profile WHERE Name = 'Eventify Attendee' LIMIT 1];
         u.username = data.email.substringBefore('@') + '@eventify.com.attendee';
         u.email = data.email;
         u.lastName = data.lastName;
