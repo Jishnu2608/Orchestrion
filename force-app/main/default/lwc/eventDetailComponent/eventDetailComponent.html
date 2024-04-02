@@ -113,9 +113,7 @@
             </div>
             <!-- Event Speakers -->
             <div class="speaker slds-var-p-around_large">
-                <p class="titleCalse">
-                    Speakers
-                </p>
+                <p class="titleCalse"> Speakers </p>
                 <lightning-layout multiple-rows>
                     <template if:true={__speakers} for:each={__speakers} for:item="speaker" for:index="index">
                         <lightning-layout-item key={speaker.Id} size="12" padding="around-small" small-device-size="12" medium-device-size="6" large-device-size="4" >
@@ -143,7 +141,7 @@
                 </lightning-layout>
             </div>
             <!-- Event Organizers -->
-            <div class="speaker slds-var-p-around_large">
+            <div class="org slds-var-p-around_large">
                 <p class="titleCalse" >Event Organizer </p>
                 <p>
                     <template if:false={__eventDetails.Event_Organizer__r.Picture__c}>
