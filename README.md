@@ -8,7 +8,7 @@ Eventify, powered by Salesforce Platform, is a comprehensive solution for effici
 - Eventify utilizes Lightning Web Components, providing a modern and efficient framework for developing event management features.
 
 ### Salesforce Communities:
-- Integrated with Salesforce Communities, Eventify offers a collaborative environment for event organizers and attendees.
+- Integrated with Salesforce Digital Experience, Eventify offers a collaborative environment for event organizers and attendees.
 
 ### Attendee Tracking:
 - Eventify enables efficient tracking of attendees, allowing organizers to manage registrations and attendance with ease.
