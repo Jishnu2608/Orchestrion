@@ -41,10 +41,10 @@ public class EventAttendeeTriggerHandler {
             
             String hrefForLocation = '<a href="'+location+'"'+'target="_blank">Here</a>';
             String emailBody = 'Dear '+ att.Name + ',<br/><br/>'+
-                'Thank you for registering for '+evt.Name__c+' which will be Organized on '+
-                evt.Start_DateTime__c+' & will be held in '+evt.Location__r.Name
-                +'.<br/>We are excited to have you,'+ 
-                'see you in the event. <br/>'+
+                'Thank you for registering for '+evt.Name__c+' which will be organized on '+
+                evt.Start_DateTime__c+' and will be held at '+evt.Location__r.Name
+                +'.<br/>We are excited to have you. '+ 
+                'See you in the event. <br/>'+
                 'Find the Google Map Location for the Event '+hrefForLocation+'.<br/><br/><br/>'+
                 'Thanks,<br/>'+evt.Event_Organizer__r.Name;
             

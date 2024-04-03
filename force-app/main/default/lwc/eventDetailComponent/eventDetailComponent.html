@@ -4,7 +4,7 @@
         <template if:true={__eventDetails}>
             <!-- Event Title -->
             <div class="eventTitle slds-var-p-around_large">
-                <p>{__eventDetails.Name__c}</p>
+                <p><strong>{__eventDetails.Name__c}</strong></p>
                 <p>
                     <lightning-formatted-date-time value={__eventDetails.Start_DateTime__c} year="numeric" month="numeric" 
                         day="numeric" hour="2-digit" minute="2-digit" 
@@ -58,8 +58,8 @@
                             <template if:false={__eventDetails.EventCompleted__c} >
                                 <template if:true={__rsvpCompleted}>
                                     <p>You are attending the event</p>
-                                    <a class="slds-button slds-button_neutral" href="JavaScript:void(0);" >
-                                        un-rsvp from the event
+                                    <a class="slds-button" href="JavaScript:void(0);" style="margin-left: 35px;">
+                                        RSVPied
                                     </a>
                                 </template>
                                 <template if:false={__rsvpCompleted}>
@@ -126,10 +126,10 @@
                                 </template>
                             </p>
                             <p>
-                                {speaker.Speaker__r.Name}
+                                <strong>{speaker.Speaker__r.Name}</strong>
                             </p>
                             <p>
-                                {speaker.Speaker__r.Company__c}
+                                <strong>{speaker.Speaker__r.Company__c}</strong>
                             </p>
                             <p>
                                 <lightning-formatted-rich-text
@@ -152,10 +152,10 @@
                     </template>
                 </p>
                 <p>
-                    {__eventDetails.Event_Organizer__r.Name}
+                    <strong>{__eventDetails.Event_Organizer__r.Name}</strong>
                 </p>
                 <p>
-                    {__eventDetails.Event_Organizer__r.Company__c}
+                    <strong>{__eventDetails.Event_Organizer__r.Company__c}</strong>
                 </p>
                 <p>
                     {__eventDetails.Event_Organizer__r.ShortIntro__c}
